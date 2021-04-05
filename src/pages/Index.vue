@@ -51,6 +51,14 @@ query {
 			}
 		}
 	}
+	latests: allStrapiLatest (perPage: 4, page: 0, order: DESC, sortBy: "favorited_count") {
+		edges  {
+			node  {
+				title
+				favorited_count
+			}
+		}
+	}
 }
 </page-query>
 
