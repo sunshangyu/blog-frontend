@@ -1,0 +1,15 @@
+{
+  "name": "gridsome-demo",
+  "private": true,
+  "scripts": {
+    "develop": "gridsome develop",
+    "explore": "gridsome explore",
+    "build": "gridsome build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@gridsome/source-strapi": "^0.2.0",
+    "bootstrap": "^4.6.0",
+    "gridsome": "^0.7.0"
+  }
+}
