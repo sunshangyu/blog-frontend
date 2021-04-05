@@ -1,45 +1,70 @@
 <template>
-  <Layout>
-  
-    <!-- Main Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-preview">
-            <a href="post.html">
-              <h2 class="post-title">
-                Man must explore, and this is exploration at its greatest
-              </h2>
-              <h3 class="post-subtitle">
-                Problems look mighty small from 150 miles up
-              </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="#">Start Bootstrap</a>
-              on September 24, 2019</p>
-          </div>
-          <hr>
-          <!-- Pager -->
-          <div class="clearfix">
-            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
-          </div>
+    <Layout>
+        <div class="container">
+            <div class="hero">
+                <h1 class="hero-title">{{$page.general.edges[0].node.title}}</h1>
+                <h2 class="hero-subtitle">{{$page.general.edges[0].node.description}}</h2>
+            </div>
+            <div class="projects">
+                <div class="project" v-for="post in $page.posts.edges" :key="post.node.title">
+                    <g-link href="/projects/chelsea-landmark/" class="project-link">
+						<img
+                            alt="Banana"
+                            :src="`http://146.56.238.178:1337${post.node.cover.url}`"
+                            width="2560"
+                            class="thumbnail g-image g-image--lazy g-image--loaded"
+                        />
+						<h3 class="project-title">{{post.node.title}}</h3>
+                        <div class="categories">
+                            <span class="category" v-for="tag in post.node.tags" :key="tag.title">{{tag.title}}</span>
+							<span class="category">{{post.node.theme}}</span>
+                        </div>
+					</g-link>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    
-  </Layout>
+		<latest />
+    </Layout>
 </template>
 
-<script>
-export default {
-  metaInfo: {
-    title: 'Hello, world!'
-  }
+<page-query>
+query {
+	posts: allStrapiPost {
+		edges {
+			node {
+				title
+				theme
+				tags {
+					title
+				}
+				cover {
+					url
+				}
+			}
+		}
+	}
+	general: allStrapiGeneral {
+		edges {
+			node {
+				title
+				description
+			}
+		}
+	}
 }
+</page-query>
+
+<script>
+import Latest from '../components/Latest';
+export default {
+    metaInfo: {
+        title: "Portfolio - NWA",
+    },
+	components: {
+		Latest
+	}
+};
 </script>
 
 <style>
-.home-links a {
-  margin-right: 1rem;
-}
 </style>
